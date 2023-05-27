@@ -1,25 +1,49 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { facts } from "@/assets/Facts";
+import HomeView from "../views/HomeView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: "/",
+    name: "home",
+    component: HomeView,
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-]
+    path: "/facts",
+    name: "FactList",
+    component: () => import("../views/FactsListView.vue"),
+  },
+  {
+    path: "/fact/:id",
+    name: "fact",
+    component: () => import("../views/Fact.vue"),
+    // from which page you are coming to which page you want to enter.
+    beforeEnter: (to, _, next) => {
+      alert("Route navigation guard intercepted for the fact with id");
+      // check your authentication/role/policy
+      // localhost:8080/facts/13
+      const { id } = to.params;
+      // is a valid index number
+      const index = parseInt(id.toString());
+      if (index < 0 || index >= facts.length) {
+        next({ path: "/error" });
+        return;
+      }
+      next(); // will route you to fact card.
+    },
+  },
+
+  // catch should always be the end.
+  {
+    path: "/:CatchAll(.*)",
+    name: "PageNotFound",
+    component: () => import("../views/PageNotFound.vue"),
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
