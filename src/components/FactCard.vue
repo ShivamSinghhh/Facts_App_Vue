@@ -22,7 +22,7 @@ export default defineComponent({
     factId: {
       type: Number,
       required: true,
-      validator: (v) => typeof v === "number" && v >= 0 && v < facts.length,
+      validator: (v) => typeof v === "number" && v >= 0 && v < facts.length
     },
   },
 

@@ -15,22 +15,36 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/fact/:id",
-    name: "fact",
+    name: "Fact",
     component: () => import("../views/Fact.vue"),
-    // from which page you are coming to which page you want to enter.
+    // from which page you are coming to which page you want to enter. (to, from,next)
+
     beforeEnter: (to, _, next) => {
-      alert("Route navigation guard intercepted for the fact with id");
-      // check your authentication/role/policy
-      // localhost:8080/facts/13
+      alert("Route Nav gaurd intercepted  four rouct fact with id");
+      //Check your authentication
       const { id } = to.params;
-      // is a valid index number
+      //is a valid index or not
       const index = parseInt(id.toString());
       if (index < 0 || index >= facts.length) {
         next({ path: "/error" });
         return;
       }
-      next(); // will route you to fact card.
+      next(); //will route you to factCard
     },
+
+    // beforeEnter: (to, _, next) => {
+    //   alert("Route navigation guard intercepted for the fact with id")
+    //   // check your authentication/role/policy
+    //   // localhost:8080/facts/13
+    //   const { id } = to.params;
+    //   // is a valid index number
+    //   const index = parseInt(id.toString());
+    //   if (index < 0 || index >= facts.length) {
+    //     next({ path: "/error" });
+    //     return;
+    //   }
+    //   next(); // will route you to fact card.
+    // },
   },
 
   // catch should always be the end.

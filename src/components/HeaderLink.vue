@@ -3,7 +3,7 @@
     <router-link
       :to="to"
       class="nav-link"
-      :class="active ? 'font-weight-bold' : null"
+      :class="active ? 'bg-info' : null"
     >
       <slot />
     </router-link>

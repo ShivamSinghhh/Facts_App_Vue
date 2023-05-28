@@ -23,7 +23,8 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     const goToFact = (id: number) => {
-      router.push({ path: `/fact/${id}` });
+     // if(){} based on conditions, we can navigate.
+      router.push({ path: `/fact/${id}` });  // allows you to dynamically navigate to a route
     };
     return { facts, goToFact };
   },
