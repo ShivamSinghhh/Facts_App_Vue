@@ -1,12 +1,10 @@
 <template>
   <div class="list-group">
-    <a
-      href=""
+    <a      
       class="list-group-item list-group-item-action clickable"
       v-for="(fact, index) in facts"
       :key="index"
-      @click="goToFact(index)"
-    >
+      @click="goToFact(index)">    
       <div class="row">
         <div class="col-2"><img :src="fact.image" height="40" /></div>
         <div class="col-10 align-self-center">{{ fact.text }}</div>
